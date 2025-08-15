@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>N2D33P - Dolphin POV Visualizer</title>
+    <link rel="icon" href="/cover.png" />
+    <style>
+        html, body, #app {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            color: #fff;
+        }
+        .loader {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(120% 120% at 50% 0%, #021b2c 0%, #000 70%);
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            backdrop-filter: blur(6px);
+        }
+        .cover {
+            width: min(60vh, 80vw);
+            max-width: 520px;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+        }
+        .title { font-weight: 700; letter-spacing: 0.06em; opacity: 0.9; }
+        .subtitle { opacity: 0.8; }
+        .btn {
+            appearance: none;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #00bcd4 0%, #4dd0e1 100%);
+            color: #001018;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            box-shadow: 0 10px 24px rgba(0, 188, 212, 0.35);
+        }
+        .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+        .btn:active { transform: translateY(0); filter: brightness(0.98); }
+
+        .hud {
+            position: absolute; inset: 0; pointer-events: none; display: grid; grid-template-rows: auto 1fr auto;
+        }
+        .topbar, .bottombar {
+            display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; gap: 12px; opacity: 0.9;
+        }
+        .levels { display: flex; gap: 2px; align-items: flex-end; height: 12px; }
+        .bar { width: 3px; background:#4dd0e1; border-radius: 2px; opacity: 0.9; }
+        canvas { display: block; }
+        /* temporary debug watermark */
+        .debug { position:absolute; top:32px; left:12px; color:#7fffd4; font-size:12px; opacity:.9; pointer-events:none; }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <div class="loader" id="loader">
+        <div class="card">
+            <img class="cover" alt="Cover Art" src="/cover.png" />
+            <div class="title">N2D33P</div>
+            <div class="subtitle">by Cody Cordova</div>
+            <button id="play-btn" class="btn">Play</button>
+        </div>
+    </div>
+
+    <div class="hud" id="hud" style="display:none">
+        <div class="topbar">
+            <div style="font-weight:700">N2D33P</div>
+            <div class="levels" id="levels"></div>
+        </div>
+        <div></div>
+        <div class="bottombar">
+            <div style="opacity:0.8">WASD: move • Mouse: look • Space/Shift: up/down</div>
+            <div id="time" style="opacity:0.8"></div>
+        </div>
+    </div>
+
+    <div class="debug" id="debug" style="display:none">debug</div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+
+
